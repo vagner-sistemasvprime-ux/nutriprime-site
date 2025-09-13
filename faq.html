@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NutriPrime – Sistema para Nutricionistas e Clínicas de Nutrição</title>
+  <link rel="icon" type="image/png" href="https://i.imgur.com/7WDbZz0.png">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- ====== HEADER ====== -->
+  <header>
+    <!-- Botão mobile -->
+    <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+
+    <!-- Logo + Título -->
+    <div class="logo-title">
+      <a href="index.html" class="logo">
+        <img src="https://i.imgur.com/7WDbZz0.png" alt="Logo Nutriprime" style="height:50px;">
+      </a>
+      <h1>NutriPrime</h1>
+    </div>
+
+    <!-- Menu desktop -->
+    <nav>
+      <ul>
+        <li><a href="index.html">Página Inicial</a></li>
+        <li><a href="sobre.html">Sobre Nós</a></li>
+        <li><a href="planos.html">Planos</a></li>
+        <li><a href="faq.html" class="active">Perguntas Frequentes</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Menu lateral mobile -->
+  <div class="side-menu" id="sideMenu">
+    <ul>
+      <li><a href="index.html" onclick="toggleMenu()">Página Inicial</a></li>
+      <li><a href="sobre.html" onclick="toggleMenu()">Sobre Nós</a></li>
+      <li><a href="planos.html" onclick="toggleMenu()">Planos</a></li>
+      <li><a href="faq.html" onclick="toggleMenu()" class="active">Perguntas Frequentes</a></li>
+    </ul>
+  </div>
+
+  <!-- ====== CONTEÚDO FAQ ====== -->
+  <main>
+    <section class="faq">
+      <div class="container">
+        <h2>Perguntas Frequentes</h2>
+
+        <div class="faq-item">
+          <h3>1. O que é o NutriPrime?</h3>
+          <p>O NutriPrime é um software de nutrição online que ajuda nutricionistas e clínicas a organizarem seus atendimentos de forma prática, moderna e personalizada.</p>
+        </div>
+
+        <div class="faq-item">
+          <h3>2. Preciso instalar algo no computador?</h3>
+          <p>Não! O NutriPrime é 100% online, você pode acessar de qualquer dispositivo com internet.</p>
+        </div>
+
+        <div class="faq-item">
+          <h3>3. O sistema precisa de internet para funcionar? </h3>
+          <p>Sim! Sim, o acesso é totalmente online. Isso garante que você possa acessar seus dados de qualquer lugar com conexão à internet.</p>
+        </div>
+
+        <div class="faq-item">
+          <h3>4. Posso testar antes de contratar?</h3>
+          <p>Claro! Oferecemos um período de teste gratuito de 7 dias para que você conheça todas as funcionalidades.</p>
+</div>
+
+
+<div class="faq-item">
+          <h3>5. O NutriPrime pode ser usado por mais de um profissional ao mesmo tempo? </h3>
+          <p>Sim! O nosso software permite múltiplos acessos simultâneos, ideal para clínicas ou equipes de nutrição. </p>
+</div>
+
+<div class="faq-item">
+          <h3>6. O paciente pode ter acesso a um portal ou aplicativo próprio?</h3>
+          <p>Sim! Apenas no plano Pró. Os pacientes podem acessar seus planos alimentares, receitas e muito mais, por meio de um portal exclusivo. </p>
+</div>
+
+<div class="faq-item">
+          <h3>7. Há novidades e atualizações frequentes no sistema? </h3>
+          <p>Sim! Estamos sempre lançando melhorias e novas funcionalidades para deixar sua experiência cada vez mais completa. </p>
+</div>
+
+
+        
+      </div>
+    </section>
+  </main>
+
+  <!-- ====== CALL TO ACTION (Teste Grátis) ====== -->
+  <section class="cta-teste">
+    <div class="container">
+      <h2>Experimente grátis por 7 dias</h2>
+      <p>Descubra como o NutriPrime pode transformar seus atendimentos com agilidade e organização.</p>
+      <a href="planos.html#teste-gratis" class="btn-teste">Quero meu teste grátis</a>
+    </div>
+  </section>
+
+  <script>
+    function toggleMenu() {
+      document.getElementById("sideMenu").classList.toggle("active");
+    }
+  </script>
+</body>
+</html>

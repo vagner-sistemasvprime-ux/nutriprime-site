@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NutriPrime – Sistema para Nutricionistas e Clínicas de Nutrição</title>
+  <link rel="icon" type="image/png" href="https://i.imgur.com/7WDbZz0.png">
+ <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- ===== HEADER ===== -->
+  <header>
+    <!-- Botão mobile -->
+    <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+
+    <!-- Logo + Título -->
+    <div class="logo-title">
+      <a href="index.html" class="logo">
+        <img src="https://i.imgur.com/7WDbZz0.png" alt="Logo Nutriprime" style="height:50px;">
+
+      </a>
+      <h1>NutriPrime – Sistema para Nutricionistas</h1>
+    </div>
+
+    <!-- Menu desktop -->
+    <nav>
+      <ul>
+        <li><a href="index.html">Página Inicial</a></li>
+        <li><a href="sobre.html" class="active">Sobre Nós</a></li>
+        <li><a href="planos.html">Planos</a></li>
+        <li><a href="faq.html">Perguntas Frequentes</a></li>
+      </ul>
+    </nav>
+  </header>
+
+ <!-- Menu lateral mobile -->
+<div class="side-menu" id="sideMenu">
+  <!-- Título apenas para mobile -->
+  <h1 class="mobile-title">NutriPrime – Sistema para Nutricionistas e Clínicas de Nutrição</h1>
+  
+  <ul>
+    <li><a href="index.html" onclick="toggleMenu()">Página Inicial</a></li>
+    <li><a href="sobre.html" onclick="toggleMenu()" class="active">Sobre Nós</a></li>
+    <li><a href="planos.html" onclick="toggleMenu()">Planos</a></li>
+    <li><a href="faq.html" onclick="toggleMenu()">Perguntas Frequentes</a></li>
+  </ul>
+</div>
+
+
+
+  <!-- ===== CONTEÚDO ===== -->
+  <main>
+
+<section class="sobre-nos-imagem">
+  <div class="container">
+    <img src="https://i.postimg.cc/NM2p81cF/logo-nutriprime-sem-fundo.png" alt="Sobre Nós" />
+  </div>
+</section>
+
+
+    <section class="sobre-nos">
+      <div class="container">
+        <h2>Nossa História</h2>
+        <p>
+          Tudo começou com uma ideia simples: facilitar a vida de profissionais que querem oferecer o melhor atendimento sem se perder em planilhas, papéis ou sistemas complicados. Somos uma equipe de desenvolvedores e especialistas em gestão de serviços personalizados, apaixonados por criar soluções que realmente ajudem no dia a dia dos nutricionistas e clínicas.
+Nosso objetivo sempre foi unir tecnologia e praticidade, criando um sistema para nutricionista que se adapte às necessidades de cada usuário, sem exigir mudanças no jeito de trabalhar. Assim nasceu o nosso software de nutrição online: Nutriprime uma plataforma flexível, intuitiva e totalmente personalizável, pensada para otimizar atendimentos, organizar processos e melhorar a experiência de clientes e pacientes, com acompanhamento nutricional completo.
+
+        </p>
+      </div>
+    </section>
+
+
+<section class="sobre-nos">
+  <div class="container">
+    <h2>Quem Somos?</h2>
+    <p>
+      Somos profissionais que entendem de tecnologia e, principalmente, entendem de pessoas. Nosso sistema de nutição é feito para aproximar você de quem importa, tornando o atendimento mais humano e eficiente. 
+Acreditamos que cada profissional merece um sistema que acompanhe sua trajetória. Nosso propósito é deixar um legado de organização, praticidade e crescimento, ajudando cada usuário a atingir seu máximo potencial. 
+    </p>
+  </div>
+</section>
+
+<section class="sobre-nos">
+  <div class="container">
+    <h2>O que Fazemos?</h2>
+    <p>
+      Desenvolvemos soluções digitais que facilitam a rotina de nutricionistas e clínicas, oferecendo ferramentas para 
+      gerenciamento de atendimentos nutricionais, acompanhamento nutricional, organização de pacientes e personalização de planos. 
+      Nosso objetivo é garantir eficiência, praticidade e tecnologia para que cada profissional possa focar no que realmente importa: o cuidado com seus pacientes. Tudo isso em uma interface moderna, prática e adaptável, personalizada de acordo com sua marca e estilo de trabalho.
+    </p>
+  </div>
+</section>
+
+<!-- ====== CALL TO ACTION (TESTE GRÁTIS) ====== -->
+<section class="cta-teste">
+  <div class="container">
+    <h2>Experimente grátis por 7 dias</h2>
+    <p>Descubra como o NutriPrime pode transformar seus atendimentos com agilidade e organização.</p>
+    <a href="planos.html#teste-gratis" class="btn-teste">Quero meu teste grátis</a>
+  </div>
+</section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  </main>
+
+  <script>
+    function toggleMenu() {
+      document.getElementById("sideMenu").classList.toggle("active");
+    }
+  </script>
+
+</body>
+</html>

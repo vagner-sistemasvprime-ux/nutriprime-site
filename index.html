@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NutriPrime – Sistema para Nutricionistas e Clínicas de Nutrição</title>
+  <link rel="icon" type="image/png" href="https://i.imgur.com/7WDbZz0.png">
+ <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- Header -->
+<header>
+  <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+
+  <div class="logo-title">
+    <a href="#home" class="logo">
+      <img src="https://i.imgur.com/7WDbZz0.png" alt="Logo Nutriprime" style="height:50px;">
+
+    </a>
+    <h1 class="header-title">NutriPrime – Sistema para Nutricionistas e Clínicas de Nutrição</h1>
+  </div>
+
+  <nav>
+    <ul>
+  <li><a href="index.html">Página Inicial</a></li>
+  <li><a href="sobre.html" class="active">Sobre Nós</a></li>
+  <li><a href="planos.html">Planos</a></li>
+  <li><a href="faq.html">Perguntas Frequentes</a></li>
+</ul>
+
+  </nav>
+</header>
+
+<!-- Menu lateral mobile -->
+<div class="side-menu" id="sideMenu">
+  <!-- Título apenas para mobile -->
+  <h1 class="mobile-title">NutriPrime – Sistema para Nutricionistas e Clínicas de Nutrição</h1>
+  
+  <ul>
+    <li><a href="index.html" onclick="toggleMenu()">Página Inicial</a></li>
+    <li><a href="sobre.html" onclick="toggleMenu()" class="active">Sobre Nós</a></li>
+    <li><a href="planos.html" onclick="toggleMenu()">Planos</a></li>
+    <li><a href="faq.html" onclick="toggleMenu()">Perguntas Frequentes</a></li>
+  </ul>
+</div>
+
+
+  <main>
+    <!-- Seção Hero -->
+<section class="hero">
+  <div class="hero-overlay">
+    <h1>Transforme sua rotina como nutricionista através do nosso software de nutrição</h1>
+    <p>Atenda com agilidade, organização e tecnologia personalizada.</p>
+  </div>
+</section>
+
+<!-- Seção Missão -->
+<section class="mission" id="missao">
+  <div class="container">
+    <h2>Missão</h2>
+    <p>"Transformar a experiência de acompanhamento nutricional com soluções digitais que unem praticidade, organização e resultados."</p>
+  </div>
+</section>
+
+
+<!-- Seção de Recursos / Benefícios -->
+<section class="features" id="beneficios">
+  <div class="container">
+    <h2>Benefícios do NutriPrime</h2>
+    <div class="features-grid">
+      <div class="feature">
+        <img src="https://i.postimg.cc/xTyG95QG/22c468b0-fd98-4da4-ac65-19f20c680fe0.jpg" alt="Praticidade">
+        <div class="feature-text">
+          <h3>Praticidade</h3>
+          <p>“Mais controle, menos complicação. Transforme o acompanhamento de pacientes com nosso software de nutrição online personalizado.  ”</p>
+        </div>
+      </div>
+      <div class="feature">
+        <img src="https://i.postimg.cc/zvNjkc5B/post-thumbnail-ec21f394021f6855cc15bdb6eab6e726.webp" alt="Usuabilidade">
+        <div class="feature-text">
+          <h3>Facilidade de uso</h3>
+          <p>“Planos personalizados com facilidade no NutriPrime – sistema de nutrição fácil e intuitivo, ideal para recém-formados em nutrição que buscam um software para nutricionistas e atendimento nutricional eficiente. ”</p>
+        </div>
+      </div>
+      <div class="feature">
+        <img src="https://i.postimg.cc/TYC9r0sd/doctor-checking-customer-profile.png" alt="Controle">
+        <div class="feature-text">
+          <h3>Controle do consultório</h3>
+          <p>Acompanhe a evolução de seus pacientes de forma clara, com relatórios e gráficos intuitivos.</p>
+        </div>
+      </div>
+      <div class="feature">
+        <img src="https://i.postimg.cc/2yT47j2c/Qual-a-importancia-da-Anamnese-Clinica-1.png" alt="Resultados">
+        <div class="feature-text">
+          <h3>Resultados</h3>
+          <p>“Mais praticidade no atendimento, mais foco nos resultados.”</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+<!-- Seção Carrossel -->
+<section class="carousel-section" id="carrossel">
+  <div class="container carousel-container">
+    <div class="carousel-text">
+      <h2>Exclusividade</h2>
+      <p>Cada conta pode ser configurada de maneira única, garantindo que você tenha um sistema para nutricionista realmente do seu jeito. Isso significa que não há padronização forçada — seu software de nutrição será único, assim como você e seus atendimentos. Com o sistema online de acompanhamento nutricional, é possível personalizar recursos para clínicas, consultórios ou atendimentos individuais, trazendo mais organização e praticidade ao dia a dia do profissional. 
+</p>
+    </div>
+    <div class="carousel">
+      <div class="carousel-images">
+        <img src="https://i.imgur.com/1iBq91D.jpeg" alt="Nutriprime Tema Verde" class="active">
+        <img src="https://i.imgur.com/M4RN5U4.jpeg" alt="Nutriprime Tema Rosa">
+        <img src="https://i.imgur.com/CM1vIzx.jpeg" alt="Nutriprime Tema Preto">
+        <img src="https://i.imgur.com/75o7awq.jpeg" alt="Nutriprime Tema Padrão">
+
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+
+<!-- ====== CALL TO ACTION (TESTE GRÁTIS) ====== -->
+<section class="cta-teste">
+  <div class="container">
+    <h2>Experimente grátis por 7 dias</h2>
+    <p>Descubra como o NutriPrime pode transformar seus atendimentos com agilidade e organização.</p>
+    <a href="planos.html#teste-gratis" class="btn-teste">Quero meu teste grátis</a>
+  </div>
+</section>
+
+
+
+
+
+
+
+
+
+
+
+  </main>
+
+  <script>
+    function toggleMenu() {
+      document.getElementById("sideMenu").classList.toggle("active");
+    }
+
+
+
+let currentIndex = 0;
+const slides = document.querySelectorAll('.carousel-images img');
+
+function showSlide(index) {
+  const carouselImages = document.querySelector('.carousel-images');
+  const slideWidth = slides[0].clientWidth;
+  carouselImages.style.transform = `translateX(-${slideWidth * index}px)`;
+}
+
+// Avança automaticamente a cada 3 segundos
+setInterval(() => {
+  currentIndex = (currentIndex + 1) % slides.length;
+  showSlide(currentIndex);
+}, 3000);
+
+
+  </script>
+</body>
+</html>
