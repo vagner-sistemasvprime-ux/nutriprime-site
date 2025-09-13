@@ -854,3 +854,51 @@ html {
   color: #555;
   line-height: 1.6;
 }
+
+.bloco-imagem-texto {
+  padding: 60px 20px;
+  background: #fff;
+}
+
+.bloco-imagem-texto .container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.bloco {
+  display: flex;
+  align-items: center;
+  gap: 40px;
+}
+
+.bloco img {
+  width: 50%;
+  border-radius: 12px;
+  object-fit: cover;
+}
+
+.bloco-texto h2 {
+  font-size: 2rem;
+  color: #004aad;
+  margin-bottom: 20px;
+}
+
+.bloco-texto p {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  color: #333;
+}
+
+/* Responsivo */
+@media (max-width: 768px) {
+  .bloco {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .bloco img {
+    width: 100%;
+    height: auto;
+  }
+}
+
