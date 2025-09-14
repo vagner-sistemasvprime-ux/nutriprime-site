@@ -902,4 +902,24 @@ html {
   }
 }
 
+.video-apresentacao {
+  text-align: center;
+  padding: 40px 20px;
+  background: #f9f9f9; /* ou transparente se quiser clean */
+}
+
+.video-apresentacao h2 {
+  margin-bottom: 20px;
+  font-size: 28px;
+  color: #333;
+}
+
+.video-apresentacao iframe {
+  border: none;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  max-width: 900px;
+  width: 100%;
+}
+
 
