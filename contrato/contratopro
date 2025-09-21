@@ -1,0 +1,12 @@
+<iframe src="https://script.google.com/macros/s/AKfycbx_scrRjnChIyaVaop82oEblRDL3uhJ0IOkPKBKNEhrjJZXxZDMxdJgSKqK45I98RmeRA/exec" 
+        id="iframeContrato" 
+        style="width:100%; border:none;" 
+        onload="ajustarAltura()"></iframe>
+
+<script>
+window.addEventListener("message", function(event){
+  if(event.data.type==="ajustarAltura"){
+    document.getElementById("iframeContrato").style.height = event.data.altura + "px";
+  }
+});
+</script>
