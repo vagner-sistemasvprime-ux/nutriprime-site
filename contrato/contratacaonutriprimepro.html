@@ -5,172 +5,184 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Contratação NutriPrime</title>
 <style>
-  body { font-family:'Segoe UI', sans-serif; background:#f3f9f4; padding:20px; }
-  .form-box { max-width:700px; margin:0 auto; background:#fff; padding:30px; border-radius:12px; border-left:10px solid #81c784; border-right:10px solid #81c784; box-shadow:0 6px 20px rgba(0,0,0,0.1);}
-  h2 { color:#2e7d32; text-align:center; }
-  label { display:block; margin-top:15px; font-weight:bold; color:#2e7d32; font-size:14px; }
-  input, select { width:100%; padding:12px; font-size:16px; margin-top:5px; border:1.5px solid #c8e6c9; border-radius:8px; box-sizing:border-box;}
-  button { background-color:#66bb6a; color:#fff; font-weight:bold; border:none; border-radius:8px; padding:15px 20px; font-size:20px; cursor:pointer; margin-top:25px; width:100%; }
-  button:hover { background-color:#43a047; }
-  .payment-link { margin-top:30px; text-align:center; }
-  .payment-link a { background:#ffd54f; color:#333; padding:15px 25px; text-decoration:none; font-weight:bold; border-radius:8px; display:inline-block; }
+body{font-family:sans-serif;background:#f3f9f4;padding:20px;}
+.form-box{max-width:700px;margin:0 auto;background:#fff;padding:30px;border-radius:12px;border-left:10px solid #81c784;border-right:10px solid #81c784;box-shadow:0 6px 20px rgba(0,0,0,.1);}
+h2{text-align:center;color:#2e7d32;}
+label{display:block;margin-top:15px;font-weight:bold;color:#2e7d32;}
+input,select{width:100%;padding:12px;margin-top:5px;border:1.5px solid #c8e6c9;border-radius:8px;box-sizing:border-box;font-size:16px;}
+button{background:#66bb6a;color:#fff;border:none;border-radius:8px;padding:15px 20px;font-size:20px;cursor:pointer;margin-top:25px;width:100%;}
+button:hover{background:#43a047;}
+#status{text-align:center;margin-top:20px;font-weight:bold;color:#2e7d32;}
+.payment-link{margin-top:30px;text-align:center;}
+.payment-link a{background:#ffd54f;color:#333;padding:15px 25px;text-decoration:none;font-weight:bold;border-radius:8px;display:inline-block;}
 
-  /* Modal contrato */
-  #modalContrato { display:none; position:fixed; top:0; left:0; width:100%; height:100%; background-color:rgba(0,0,0,0.6); z-index:9999; }
-  .modal-content { background:#fff; margin:5% auto; padding:20px 30px; width:90%; max-width:800px; border-radius:8px; height:80vh; display:flex; flex-direction:column; }
-  #contratoTexto { flex:1; overflow-y:auto; padding-right:15px; border:1px solid #ccc; border-radius:6px; margin-bottom:15px; white-space: pre-wrap; font-size:14px; line-height:1.5; }
-  #botaoAceitar { display:none; flex-shrink:0; }
-  #status { text-align:center; margin-top:20px; font-weight:bold; color:#2e7d32; }
+/* Modal contrato */
+.modal {
+  display:none;
+  position:fixed;
+  z-index:9999;
+  left:0; top:0;
+  width:100%; height:100%;
+  overflow:auto;
+  background-color: rgba(0,0,0,0.6);
+}
+.modal-content {
+  background:#fff;
+  margin:50px auto;
+  padding:20px;
+  border-radius:12px;
+  max-width:800px;
+  max-height:80%;
+  overflow-y:auto;
+}
+.modal-header{display:flex;justify-content:space-between;align-items:center;}
+.modal-header h3{margin:0;}
+.close-btn{cursor:pointer;font-size:24px;font-weight:bold;color:#444;}
 </style>
 </head>
 <body>
 
 <div class="form-box">
-  <h2>Finalizar Contratação do Sistema NUTRIPRIME</h2>
-  <p style="text-align:center;">Preencha os dados abaixo e visualize o contrato antes de enviar.</p>
+<h2>Formulário de Contratação</h2>
+<label>Nome completo</label>
+<input type="text" id="nome" required>
 
-  <label>Nome completo*</label>
-  <input type="text" id="nome" required />
+<label>Documento (CPF/RG)</label>
+<input type="text" id="documento" required>
 
-  <label>CPF ou CNPJ*</label>
-  <input type="text" id="documento" required />
+<label>Endereço</label>
+<input type="text" id="endereco" required>
 
-  <label>Endereço completo*</label>
-  <input type="text" id="endereco" required />
+<label>CRN/CRM</label>
+<input type="text" id="crm">
 
-  <label>CRN ou CRM (opcional)</label>
-  <input type="text" id="crm" />
+<label>Whatsapp</label>
+<input type="text" id="whatsapp">
 
-  <label>WhatsApp*</label>
-  <input type="text" id="whatsapp" placeholder="(99) 99999-9999" required />
+<label>E-mail</label>
+<input type="email" id="email">
 
-  <label>Email*</label>
-  <input type="email" id="email" required />
+<label>Plano</label>
+<select id="plano">
+  <option value="Plano Básico - R$ 34,90">Plano Básico - R$ 34,90</option>
+  <option value="Plano Pro - R$ 49,90">Plano Pro - R$ 49,90</option>
+  <option value="Plano Pro Promocional - R$ 34,90">Plano Pro Promocional - R$ 34,90</option>
+</select>
 
-  <div id="promoContainer"></div>
-
-  <div style="text-align:center; margin-top: 25px;">
-    <button onclick="mostrarContrato()">📄 Ver Contrato e Aceitar</button>
-  </div>
-
-  <button id="botaoEnviar" onclick="enviarFormulario()" style="display:none;">
-    ✅ Enviar Dados
-  </button>
-
-  <div id="status"></div>
-
-  <div class="payment-link" id="linkPagamento" style="display:none;">
-    <p>Ir para pagamento:</p>
-    <a id="botaoPagamento" href="#" target="_blank">💳 Pagar</a>
-  </div>
+<button onclick="mostrarContrato()">Visualizar Contrato</button>
+<div id="status"></div>
+<div class="payment-link" id="paymentLink"></div>
 </div>
 
 <!-- Modal do contrato -->
-<div id="modalContrato">
+<div class="modal" id="modalContrato">
   <div class="modal-content">
-    <h3>📄 Contrato de Prestação de Serviços - NutriPrime</h3>
-    <div id="contratoTexto"></div>
-    <label style="margin-top: 10px;">
-      <input type="checkbox" id="aceiteCheckbox" /> Li e estou de acordo com os termos acima
-    </label>
-    <br />
-    <button id="botaoAceitar" onclick="confirmarAceite()">✅ Aceitar e continuar</button>
-    <button onclick="fecharModal()" style="background:#ccc; color:#000; margin-left:10px;">❌ Cancelar</button>
+    <div class="modal-header">
+      <h3>Contrato NutriPrime</h3>
+      <span class="close-btn" onclick="fecharContrato()">&times;</span>
+    </div>
+    <div id="conteudoContrato" style="margin-top:15px;line-height:1.5;"></div>
+    <button onclick="confirmarContrato()" style="margin-top:20px;background:#4CAF50;width:100%;">Confirmar Contrato</button>
   </div>
 </div>
 
 <script>
-let dadosForm = {};
-const promoAtiva = true;
+// Geração do contrato HTML com placeholders
+function gerarContratoHTML(dados){
+  const valorPlano = dados.plano.match(/R\$ *[\d,\.]+/)? dados.plano.match(/R\$ *[\d,\.]+/)[0] : '';
+  const hoje = new Date();
+  const dataHoje = hoje.toLocaleDateString('pt-BR');
+  const horaAgora = hoje.toLocaleTimeString('pt-BR');
 
-window.onload = () => {
-  const promoDiv = document.getElementById("promoContainer");
-  promoDiv.innerHTML = `
-    <input type="hidden" id="plano" value="Plano Básico - R$ 44,90" />
-    <p style="color:red; font-weight:bold; text-align:center; font-size:30px; margin-top:20px;">
-      🎉 Você selecionou o Plano NUTRIPRIME PRÓ por R$ 44,90 mensais.
-    </p>
-  `;
-  dadosForm.plano = "NUTRIPRIME PRÓ - R$ 44,90";
-
-  fetch("https://api.ipify.org?format=json")
-    .then(resp => resp.json())
-    .then(data => { dadosForm.ip = data.ip; })
-    .catch(() => { dadosForm.ip = "IP não disponível"; });
-};
-
-const textoContratoBase = `CONTRATO DE PRESTAÇÃO DE SERVIÇOS – SISTEMA NUTRIPRIME
-
-CONTRATADA: VAGNER FRANCISCO BASTOS ALBUQUERQUE, CNPJ 61.124.508/0001-96, Cabo Frio/RJ;
-
-CONTRATANTE: {{NOME CLIENTE}}, CPF/CNPJ {{DOC CLIENTE}}, endereço {{ENDERECO CLIENTE}}, registro {{CRM_CRN}};
-
-CLÁUSULA 3 – VALORES E FORMA DE PAGAMENTO
-3.1. Valor: R$ {{VALOR PLANO}}, Plano: {{PLANO ESCOLHIDO}}, Forma de pagamento: {{FORMA PAGAMENTO}}
-
-Cabo Frio/RJ, {{DATA}}
+  return `
+<h4>Contrato de Prestação de Serviços - Sistema NutriPrime</h4>
+<p>Cliente: <b>${dados.nome}</b></p>
+<p>Documento: <b>${dados.documento}</b></p>
+<p>Endereço: <b>${dados.endereco}</b></p>
+<p>CRN/CRM: <b>${dados.crm || 'N/A'}</b></p>
+<p>Plano escolhido: <b>${dados.plano}</b> (Valor: <b>${valorPlano}</b>)</p>
+<p>Data de contratação: ${dataHoje} às ${horaAgora}</p>
+<p>Whatsapp: ${dados.whatsapp}<br>Email: ${dados.email}</p>
+<hr>
+<p>Declaro que li, entendi e aceito todas as condições do contrato acima.</p>
+<p><i>Assinatura digital ao confirmar.</i></p>
 `;
+}
 
-function mostrarContrato() {
-  const nome = document.getElementById("nome").value.trim();
-  const documento = document.getElementById("documento").value.trim();
-  const endereco = document.getElementById("endereco").value.trim();
-  const crm = document.getElementById("crm").value.trim() || "não informado";
-  const plano = dadosForm.plano || "Plano Pro Promocional - R$ 34,90";
+function mostrarContrato(){
+  const dados = {
+    nome: document.getElementById('nome').value,
+    documento: document.getElementById('documento').value,
+    endereco: document.getElementById('endereco').value,
+    crm: document.getElementById('crm').value,
+    whatsapp: document.getElementById('whatsapp').value,
+    email: document.getElementById('email').value,
+    plano: document.getElementById('plano').value,
+    ip: '' // opcional: usar serviço para IP
+  };
 
-  if (!nome || !documento || !endereco) {
-    alert("Preencha nome, documento e endereço antes de continuar.");
+  if(!dados.nome || !dados.documento || !dados.endereco || !dados.email){
+    alert('Preencha todos os campos obrigatórios!');
     return;
   }
 
-  let contratoPersonalizado = textoContratoBase
-    .replace(/{{NOME CLIENTE}}/g, nome)
-    .replace(/{{DOC CLIENTE}}/g, documento)
-    .replace(/{{ENDERECO CLIENTE}}/g, endereco)
-    .replace(/{{CRM_CRN}}/g, crm)
-    .replace(/{{PLANO ESCOLHIDO}}/g, plano)
-    .replace(/{{VALOR PLANO}}/g, plano.match(/R\$ *[\d,\.]+/)? plano.match(/R\$ *[\d,\.]+/)[0] : "")
-    .replace(/{{FORMA PAGAMENTO}}/g, "Boleto / Cartão")
-    .replace(/{{DATA}}/g, new Date().toLocaleDateString("pt-BR"));
-
-  document.getElementById("contratoTexto").innerText = contratoPersonalizado;
-  document.getElementById("modalContrato").style.display = "block";
-  document.getElementById("aceiteCheckbox").checked = false;
-  document.getElementById("botaoAceitar").style.display = "none";
+  const conteudo = gerarContratoHTML(dados);
+  document.getElementById('conteudoContrato').innerHTML = conteudo;
+  document.getElementById('modalContrato').style.display = 'block';
 }
 
-document.getElementById("aceiteCheckbox").addEventListener("change", function() {
-  document.getElementById("botaoAceitar").style.display = this.checked ? "block" : "none";
-});
-
-function fecharModal() { document.getElementById("modalContrato").style.display = "none"; }
-
-function confirmarAceite() {
-  fecharModal();
-  document.getElementById("botaoEnviar").style.display = "block";
-  document.getElementById("status").innerText = "Contrato aceito! Agora finalize seu cadastro.";
+function fecharContrato(){
+  document.getElementById('modalContrato').style.display = 'none';
 }
 
-function enviarFormulario() {
-  dadosForm.nome = document.getElementById("nome").value.trim();
-  dadosForm.documento = document.getElementById("documento").value.trim();
-  dadosForm.endereco = document.getElementById("endereco").value.trim();
-  dadosForm.crm = document.getElementById("crm").value.trim() || "não informado";
-  dadosForm.email = document.getElementById("email").value.trim();
-  dadosForm.whatsapp = document.getElementById("whatsapp").value.trim();
+// Envia contrato ao clicar Confirmar
+async function confirmarContrato(){
+  const statusDiv = document.getElementById('status');
+  const paymentDiv = document.getElementById('paymentLink');
+  statusDiv.innerText = 'Enviando...';
+  paymentDiv.innerHTML = '';
+  const modal = document.getElementById('modalContrato');
 
-  fetch("https://script.google.com/macros/s/AKfycbx_scrRjnChIyaVaop82oEblRDL3uhJ0IOkPKBKNEhrjJZXxZDMxdJgSKqK45I98RmeRA/exec", {
-    method: "POST",
-    body: JSON.stringify(dadosForm),
-    headers: { "Content-Type": "application/json" }
-  })
-  .then(res => res.json())
-  .then(data => {
-    document.getElementById("status").innerText = "✅ Dados enviados com sucesso!";
-    document.getElementById("linkPagamento").style.display = "block";
-    document.getElementById("botaoPagamento").href = data.linkPagamento;
-  })
-  .catch(err => { console.error(err); alert("Erro ao enviar dados!"); });
+  const dados = {
+    nome: document.getElementById('nome').value,
+    documento: document.getElementById('documento').value,
+    endereco: document.getElementById('endereco').value,
+    crm: document.getElementById('crm').value,
+    whatsapp: document.getElementById('whatsapp').value,
+    email: document.getElementById('email').value,
+    plano: document.getElementById('plano').value,
+    ip: ''
+  };
+
+  try {
+    const res = await fetch('https://script.google.com/macros/s/SEU_ID_WEBAPP/exec',{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body: JSON.stringify(dados)
+    });
+    const json = await res.json();
+
+    if(json.status === "ok"){
+      statusDiv.innerText = json.message;
+      if(json.linkPagamento){
+        paymentDiv.innerHTML = `<a href="${json.linkPagamento}" target="_blank">Clique aqui para pagar seu plano</a>`;
+      }
+      modal.style.display = 'none';
+    }else{
+      statusDiv.innerText = 'Erro ao enviar formulário.';
+    }
+  } catch(e){
+    console.error(e);
+    statusDiv.innerText = 'Erro de conexão. Tente novamente.';
+  }
+}
+
+// Fechar modal ao clicar fora
+window.onclick = function(event){
+  const modal = document.getElementById('modalContrato');
+  if(event.target === modal){
+    modal.style.display = 'none';
+  }
 }
 </script>
 </body>
