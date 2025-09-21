@@ -1,31 +1,314 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Contratação Nutriprime Pró</title>
-  <link rel="icon" type="image/png" href="https://i.imgur.com/7WDbZz0.png">
-
+  <title>Contratação NutriPrime</title>
   <style>
-    html, body {
-      margin: 0;
-      padding: 0;
-      height: 99%;
-      width: 100%;
-    }
-
     body {
-      font-family: Arial, sans-serif;
+      font-family: 'Segoe UI', sans-serif;
+      background: #f3f9f4;
+      margin: 0;
+      padding: 20px;
     }
-
-    iframe {
+    .form-box {
+      max-width: 700px;
+      margin: 0 auto;
+      background: #fff;
+      padding: 30px;
+      border-radius: 12px;
+      border-left: 10px solid #81c784;
+      border-right: 10px solid #81c784;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+    }
+    h2 { color: #2e7d32; text-align: center; }
+    label {
+      display: block;
+      margin-top: 15px;
+      font-weight: bold;
+      color: #2e7d32;
+      font-size: 14px;
+    }
+    input, select {
       width: 100%;
-      height: 100%;
+      padding: 12px;
+      font-size: 16px;
+      margin-top: 5px;
+      border: 1.5px solid #c8e6c9;
+      border-radius: 8px;
+      box-sizing: border-box;
+    }
+    button {
+      background-color: #66bb6a;
+      color: #fff;
+      font-weight: bold;
       border: none;
+      border-radius: 8px;
+      padding: 15px 20px;
+      font-size: 20px;
+      cursor: pointer;
+      margin-top: 25px;
+      width: 100%;
+    }
+    button:hover { background-color: #43a047; }
+    .payment-link { margin-top: 30px; text-align: center; }
+    .payment-link a {
+      background: #ffd54f;
+      color: #333;
+      padding: 15px 25px;
+      text-decoration: none;
+      font-weight: bold;
+      border-radius: 8px;
+      display: inline-block;
+    }
+    #modalContrato {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background-color: rgba(0,0,0,0.6);
+      z-index: 9999;
+    }
+    .modal-content {
+      background: #fff;
+      margin: 5% auto;
+      padding: 20px 30px;
+      width: 90%;
+      max-width: 800px;
+      border-radius: 8px;
+      max-height: 80vh;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+    #contratoTexto {
+      flex: 1 1 auto;
+      overflow-y: auto;
+      padding-right: 15px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      margin-bottom: 15px;
+      white-space: pre-wrap;
+      font-size: 14px;
+      line-height: 1.5;
+    }
+    #botaoAceitar { display: none; flex-shrink: 0; }
+    #status { text-align: center; margin-top: 20px; font-weight: bold; color: #2e7d32; }
+    @media (max-width: 600px) {
+      .form-box { padding: 20px; }
+      button { font-size: 18px; padding: 12px 15px; }
     }
   </style>
 </head>
 <body>
-  <iframe src="https://script.google.com/macros/s/AKfycbx_scrRjnChIyaVaop82oEblRDL3uhJ0IOkPKBKNEhrjJZXxZDMxdJgSKqK45I98RmeRA/exec" title="Contratação Nutriprime Pró"></iframe>
+  <div class="form-box">
+    <h2>Finalizar Contratação NutriPrime</h2>
+    <p style="text-align:center;">Preencha os dados abaixo e visualize o contrato antes de enviar.</p>
+
+    <label>Nome completo*</label>
+    <input type="text" id="nome" required />
+
+    <label>CPF ou CNPJ*</label>
+    <input type="text" id="documento" required />
+
+    <label>Endereço completo*</label>
+    <input type="text" id="endereco" required />
+
+    <label>CRN ou CRM (opcional)</label>
+    <input type="text" id="crm" />
+
+    <label>WhatsApp*</label>
+    <input type="text" id="whatsapp" placeholder="(99) 99999-9999" required />
+
+    <label>Email*</label>
+    <input type="email" id="email" required />
+
+    <div id="promoContainer"></div>
+
+    <div style="text-align:center; margin-top: 25px;">
+      <button onclick="mostrarContrato()">📄 Ver Contrato e Aceitar</button>
+    </div>
+
+    <button id="botaoEnviar" onclick="enviarFormulario()" style="display:none;">
+      ✅ Enviar Dados
+    </button>
+
+    <div id="status"></div>
+
+    <div class="payment-link" id="linkPagamento" style="display:none;">
+      <p>Ir para pagamento:</p>
+      <a id="botaoPagamento" href="#" target="_blank">💳 Pagar</a>
+    </div>
+  </div>
+
+  <div id="modalContrato">
+    <div class="modal-content">
+      <h3>📄 Contrato de Prestação de Serviços - NutriPrime</h3>
+      <div id="contratoTexto"></div>
+      <label style="margin-top: 10px;">
+        <input type="checkbox" id="aceiteCheckbox" /> Li e estou de acordo com os termos
+      </label><br />
+      <button id="botaoAceitar" onclick="confirmarAceite()">✅ Aceitar e continuar</button>
+      <button onclick="fecharModal()" style="background:#ccc; color:#000; margin-left:10px;">❌ Cancelar</button>
+    </div>
+  </div>
+
+  <script>
+    let dadosForm = {};
+    const promoAtiva = true;
+
+    window.onload = () => {
+      const promoDiv = document.getElementById("promoContainer");
+      promoDiv.innerHTML = `
+        <input type="hidden" id="plano" value="Plano Básico - R$ 44,90" />
+        <p style="color:red; font-weight:bold; text-align:center; font-size:20px; margin-top:20px;">
+          🎉 Você selecionou o Plano NUTRIPRIME PRÓ por R$ 44,90 mensais.
+        </p>
+      `;
+      dadosForm.plano = "NUTRIPRIME PRÓ - R$ 44,90";
+
+      fetch("https://api.ipify.org?format=json")
+        .then(r => r.json())
+        .then(data => dadosForm.ip = data.ip)
+        .catch(() => dadosForm.ip = "IP não disponível");
+    };
+
+    const textoContratoBase = `
+CONTRATO DE PRESTAÇÃO DE SERVIÇOS – SISTEMA NUTRIPRIME
+
+Pelo presente instrumento particular, de um lado:
+
+CONTRATADA: VAGNER FRANCISCO BASTOS ALBUQUERQUE, inscrita no CNPJ sob o nº 61.124.508/0001-96, com sede em RUA SÃO PAULO, 814 - CABO FRIO/RJ, doravante denominada simplesmente CONTRATADA;
+
+E, de outro lado:
+
+CONTRATANTE: {{NOME CLIENTE}}, inscrito(a) no CPF/CNPJ sob o nº {{DOC CLIENTE}}, com endereço em {{ENDERECO CLIENTE}}, portador(a) do registro profissional {{CRM_CRN}}, doravante denominado(a) simplesmente CONTRATANTE;
+
+Têm entre si, justas e contratadas, as seguintes cláusulas:
+
+CLÁUSULA 1 – OBJETO
+1.1. O presente contrato tem como objeto a disponibilização do sistema NutriPrime, uma plataforma digital de gestão e atendimento voltado para nutricionistas e profissionais da saúde, incluindo ferramentas como agendamento, controle de clientes, planos alimentares, relatórios e demais funcionalidades conforme plano contratado.
+
+CLÁUSULA 2 – PRAZO DE VIGÊNCIA
+2.1. O contrato terá vigência de 12 (doze) meses a partir da data de ativação do sistema.
+2.2. Após o término do período contratado, o CONTRATANTE poderá renovar o contrato por igual período mediante novo pagamento.
+2.3. Caso não haja manifestação por parte do CONTRATANTE até 5 (cinco) dias antes do vencimento, o acesso ao sistema será suspenso automaticamente.
+
+CLÁUSULA 3 – VALORES E FORMA DE PAGAMENTO
+3.1. Pela utilização do sistema, o CONTRATANTE pagará à CONTRATADA o valor de {{VALOR PLANO}} mensais, conforme plano {{PLANO ESCOLHIDO}}, da seguinte forma: {{FORMA PAGAMENTO}}.
+3.2. A CONTRATADA poderá oferecer um período de teste gratuito de 7 (sete) dias, sem qualquer custo ao CONTRATANTE.
+
+CLÁUSULA 4 – OBRIGAÇÕES DA CONTRATADA
+4.1. Disponibilizar o acesso ao sistema conforme prazo acordado após confirmação do pagamento ou ativação do teste.
+4.2. Oferecer suporte técnico em horário comercial via e-mail ou WhatsApp.
+4.3. Manter os dados do CONTRATANTE armazenados com segurança, em conformidade com a LGPD (Lei Geral de Proteção de Dados).
+
+CLÁUSULA 5 – OBRIGAÇÕES DO CONTRATANTE
+5.1. Efetuar o pagamento conforme acordado.
+5.2. Utilizar o sistema de forma ética e legal.
+5.3. Informar qualquer erro, falha ou necessidade de suporte técnico.
+
+CLÁUSULA 6 – CANCELAMENTO E REEMBOLSO
+6.1. O contrato poderá ser cancelado a qualquer momento, por qualquer das partes, com aviso prévio de 15 (quinze) dias.
+6.2. Em caso de cancelamento por parte do CONTRATANTE, não haverá reembolso de valores já pagos, salvo acordos expressos por escrito.
+
+CLÁUSULA 7 – CONFIDENCIALIDADE
+7.1. Ambas as partes comprometem-se a manter em sigilo todas as informações trocadas ou acessadas durante a vigência deste contrato.
+
+CLÁUSULA 8 – ACEITE ELETRÔNICO
+8.1. O presente contrato poderá ser aceito por meio eletrônico, incluindo e-mail, WhatsApp ou outra forma digital de comunicação.
+8.2. O aceite por resposta do CONTRATANTE com a mensagem “Li e estou de acordo com os termos do contrato NutriPrime” será considerado válido e eficaz para todos os efeitos legais, com base no artigo 107 do Código Civil Brasileiro.
+8.3. A CONTRATADA manterá o registro do envio e do aceite como comprovação da manifestação de vontade do CONTRATANTE.
+
+CLÁUSULA 9 – FORO
+9.1. As partes elegem o foro da Comarca de Cabo Frio/RJ, renunciando a qualquer outro, por mais privilegiado que seja.
+
+Cabo Frio/RJ, {{DATA}}
+`;
+
+    function mostrarContrato() {
+      const nome = document.getElementById("nome").value.trim();
+      const documento = document.getElementById("documento").value.trim();
+      const endereco = document.getElementById("endereco").value.trim();
+      const crm = document.getElementById("crm").value.trim() || "não informado";
+      const plano = dadosForm.plano || "Plano Pro Promocional - R$ 34,90";
+
+      if (!nome || !documento || !endereco) {
+        alert("Preencha nome, documento e endereço antes de continuar.");
+        return;
+      }
+
+      let contratoPersonalizado = textoContratoBase
+        .replace(/{{NOME CLIENTE}}/g, nome)
+        .replace(/{{DOC CLIENTE}}/g, documento)
+        .replace(/{{ENDERECO CLIENTE}}/g, endereco)
+        .replace(/{{CRM_CRN}}/g, crm)
+        .replace(/{{PLANO ESCOLHIDO}}/g, plano)
+        .replace(/{{VALOR PLANO}}/g, plano.match(/R\$ *[\d,\.]+/) ? plano.match(/R\$ *[\d,\.]+/)[0] : "")
+        .replace(/{{FORMA PAGAMENTO}}/g, "Boleto / Cartão (definir)")
+        .replace(/{{DATA}}/g, new Date().toLocaleDateString("pt-BR"));
+
+      document.getElementById("contratoTexto").innerText = contratoPersonalizado;
+
+      dadosForm = { ...dadosForm, nome, documento, endereco, crm, plano };
+      document.getElementById("modalContrato").style.display = "block";
+
+      document.getElementById("aceiteCheckbox").checked = false;
+      document.getElementById("botaoAceitar").style.display = "none";
+
+      const divContrato = document.getElementById("contratoTexto");
+      divContrato.scrollTop = 0;
+      divContrato.removeEventListener("scroll", onScrollContrato);
+      divContrato.addEventListener("scroll", onScrollContrato);
+
+      function onScrollContrato() {
+        if (divContrato.scrollTop + divContrato.clientHeight >= divContrato.scrollHeight - 2) {
+          document.getElementById("botaoAceitar").style.display = "block";
+          divContrato.removeEventListener("scroll", onScrollContrato);
+        }
+      }
+    }
+
+    function confirmarAceite() {
+      const checkbox = document.getElementById("aceiteCheckbox");
+      if (!checkbox.checked) { alert("Você precisa aceitar os termos."); return; }
+      dadosForm.aceite = "SIM";
+      document.getElementById("modalContrato").style.display = "none";
+      document.getElementById("botaoEnviar").style.display = "block";
+      document.getElementById("linkPagamento").style.display = "none";
+    }
+
+    function fecharModal() { document.getElementById("modalContrato").style.display = "none"; }
+
+    function enviarFormulario() {
+      if (dadosForm.aceite !== "SIM") { alert("Aceite o contrato antes de enviar."); return; }
+      dadosForm.email = document.getElementById("email").value.trim();
+      dadosForm.whatsapp = document.getElementById("whatsapp").value.trim();
+      dadosForm.crm = document.getElementById("crm").value.trim();
+
+      if (!dadosForm.nome || !dadosForm.email || !dadosForm.whatsapp) {
+        alert("Preencha todos os campos obrigatórios."); return;
+      }
+
+      const statusDiv = document.getElementById("status");
+      statusDiv.innerText = "Enviando...";
+      const botaoEnviar = document.getElementById("botaoEnviar");
+      botaoEnviar.disabled = true;
+      botaoEnviar.innerText = "Enviando...";
+
+      google.script.run
+        .withSuccessHandler(resposta => {
+          statusDiv.innerText = resposta;
+          botaoEnviar.style.display = "none";
+        })
+        .withFailureHandler(erro => {
+          alert("Erro ao enviar os dados: " + erro.message);
+          botaoEnviar.disabled = false;
+          botaoEnviar.innerText = "✅ Enviar Dados";
+        })
+        .salvarContratacao(dadosForm);
+    }
+  </script>
 </body>
 </html>
+
