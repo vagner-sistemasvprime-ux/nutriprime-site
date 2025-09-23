@@ -922,4 +922,11 @@ html {
   width: 100%;
 }
 
+.nota-usuarios {
+  font-size: 0.9em;
+  color: #666;
+  margin-top: 8px;
+  text-align: center;
+}
+
 
