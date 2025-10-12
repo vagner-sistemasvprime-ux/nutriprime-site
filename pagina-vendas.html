@@ -10,7 +10,7 @@
     html, body {
       margin: 0;
       padding: 0;
-      height: 99%;
+      height: 99%; /* Ajustado para 99% para evitar barras de rolagem desnecessárias */
       width: 100%;
     }
 
@@ -26,7 +26,26 @@
   </style>
 </head>
 <body>
-  <iframe src="https://script.google.com/macros/s/AKfycbyo-ryIf2JoC9yU4L-9k0ssoBECN6XFNm1p9NudBQFSlAa89sFozujhTQxC3Ks2Zvd9/exec" title="Sistema Nutriprime"></iframe>
+  <iframe id="app-iframe" title="Sistema Nutriprime"></iframe>
+
+  <script>
+    // URL BASE do seu Google Apps Script Web App
+    const APPS_SCRIPT_BASE_URL = "https://script.google.com/macros/s/AKfycbyo-ryIf2JoC9yU4L-9k0ssoBECN6XFNm1p9NudBQFSlAa89sFozujhTQxC3Ks2Zvd9/exec";
+    
+    // 1. Pega os parâmetros da URL da página ATUAL (GitHub Pages)
+    const urlParams = new URLSearchParams(window.location.search);
+    const refParam = urlParams.get('ref'); // Tenta obter o valor de "?ref="
+    
+    let finalSrc = APPS_SCRIPT_BASE_URL;
+
+    // 2. Se o parâmetro 'ref' existir na URL do GitHub Pages, adicione-o ao URL do Apps Script
+    if (refParam) {
+      finalSrc += `?ref=${refParam}`;
+    }
+
+    // 3. Define a URL completa e correta no iframe
+    document.getElementById('app-iframe').src = finalSrc;
+
+  </script>
 </body>
 </html>
-
