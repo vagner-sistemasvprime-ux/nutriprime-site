@@ -2,8 +2,8 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Assinar Sistema</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <style>
     body { font-family: Arial, sans-serif; background: #f7f8fa; color: #333; margin: 0; padding: 20px; }
     .container { max-width: 500px; margin: auto; background: white; padding: 20px; border-radius: 10px; box-shadow: 0 3px 8px rgba(0,0,0,0.1); }
@@ -44,33 +44,55 @@
   </div>
 
   <script>
-    // Captura o código do vendedor da URL
+    // Captura o código do vendedor na URL
     const urlParams = new URLSearchParams(window.location.search);
     const ref = urlParams.get("ref");
 
-    // Exibe nome do vendedor e equipe via Apps Script
-    google.script.run.withSuccessHandler(dados => {
-      if (!dados) {
-        document.getElementById("vendedorNome").textContent = "Vendedor não encontrado";
+    // Link do Web App
+    const api = "https://script.google.com/macros/s/XXXXX/exec"; // substitua pelo seu Web App
+
+    // Buscar dados do vendedor (GET)
+    if (ref) {
+      fetch(`${api}?ref=${ref}`)
+        .then(res => res.json())
+        .then(dados => {
+          if (dados.error) {
+            document.getElementById("vendedorNome").textContent = dados.error;
+            return;
+          }
+          document.getElementById("vendedorNome").textContent = dados.nome;
+          document.getElementById("equipeNome").textContent = "Equipe: " + (dados.chefe || "Independente");
+        });
+    }
+
+    // Função de compra – registra venda antes de abrir checkout
+    function comprar(plano) {
+      if (!ref) {
+        alert("Código de vendedor ausente.");
         return;
       }
-      document.getElementById("vendedorNome").textContent = dados.nome;
-      document.getElementById("equipeNome").textContent = "Equipe: " + (dados.chefe || "Independente");
-    }).getVendedorPorCodigo(ref);
 
-    // Função de compra
-    function comprar(plano) {
-      // Registra a venda na planilha antes de abrir o checkout
-      google.script.run.registrarVenda(ref, plano);
+      fetch(api, {
+        method: "POST",
+        body: JSON.stringify({ ref, plano }),
+        headers: { "Content-Type": "application/json" }
+      })
+      .then(res => res.json())
+      .then(resp => {
+        if (resp.error) {
+          alert("Erro ao registrar venda: " + resp.error);
+          return;
+        }
 
-      // Links reais do Mercado Pago
-      let linkPagamento = plano === 'basico' 
-        ? 'https://www.mercadopago.com.br/subscriptions/checkout?preapproval_plan_id=fe42e680f003451595fa0031ce283abc' 
-        : 'https://www.mercadopago.com.br/subscriptions/checkout?preapproval_plan_id=c6c298ddcc8943fba70d26d3a8aa3e7b';
+        // Abre checkout Mercado Pago
+        const linkPagamento = plano === 'basico'
+          ? 'https://www.mercadopago.com.br/subscriptions/checkout?preapproval_plan_id=fe42e680f003451595fa0031ce283abc'
+          : 'https://www.mercadopago.com.br/subscriptions/checkout?preapproval_plan_id=c6c298ddcc8943fba70d26d3a8aa3e7b';
 
-      // Abre checkout em nova aba
-      window.open(linkPagamento, '_blank');
-      alert('Venda registrada! Obrigado por adquirir o sistema.');
+        window.open(linkPagamento, '_blank');
+        alert('Venda registrada! Obrigado por adquirir o sistema.');
+      })
+      .catch(err => alert("Erro: " + err));
     }
   </script>
 </body>
