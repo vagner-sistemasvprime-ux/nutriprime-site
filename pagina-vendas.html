@@ -1,31 +1,77 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Vendas Nutriprime</title>
-  <link rel="icon" type="image/png" href="https://i.imgur.com/7WDbZz0.png">
-
+  <title>Assinar Sistema</title>
   <style>
-    html, body {
-      margin: 0;
-      padding: 0;
-      height: 99%;
-      width: 100%;
-    }
-
-    body {
-      font-family: Arial, sans-serif;
-    }
-
-    iframe {
-      width: 100%;
-      height: 100%;
-      border: none;
-    }
+    body { font-family: Arial, sans-serif; background: #f7f8fa; color: #333; margin: 0; padding: 20px; }
+    .container { max-width: 500px; margin: auto; background: white; padding: 20px; border-radius: 10px; box-shadow: 0 3px 8px rgba(0,0,0,0.1); }
+    h1 { text-align: center; color: #007bff; }
+    .vendedor { text-align: center; margin-bottom: 20px; }
+    .planos { display: flex; flex-direction: column; gap: 15px; }
+    .plano { border: 1px solid #ddd; border-radius: 8px; padding: 15px; background: #fafafa; }
+    .plano h2 { margin-top: 0; color: #007bff; }
+    button { background: #007bff; color: white; border: none; padding: 10px; border-radius: 6px; width: 100%; font-size: 16px; cursor: pointer; }
+    button:hover { background: #0056b3; }
+    .rodape { text-align: center; margin-top: 20px; font-size: 12px; color: #777; }
   </style>
 </head>
 <body>
-  <iframe src="https://script.google.com/macros/s/AKfycbxSA4S7ESH4sAEOXTnznoGszrryZ5ZcfVg6mUXhlA4bjMKRltbjjEi0Smn3f8mCBbPb/exec" title="Vendas Sistema Nutriprime"></iframe>
+  <div class="container">
+    <h1>Assine Agora</h1>
+
+    <div class="vendedor">
+      <p>Atendimento com <strong id="vendedorNome">Carregando...</strong></p>
+      <small id="equipeNome"></small>
+    </div>
+
+    <div class="planos">
+      <div class="plano">
+        <h2>Plano Básico - R$ 39,90/mês</h2>
+        <p>Ideal para autônomos e pequenos negócios.</p>
+        <button onclick="comprar('basico')">Assinar Plano Básico</button>
+      </div>
+
+      <div class="plano">
+        <h2>Plano Premium - R$ 54,90/mês</h2>
+        <p>Mais recursos e suporte prioritário.</p>
+        <button onclick="comprar('premium')">Assinar Plano Premium</button>
+      </div>
+    </div>
+
+    <p class="rodape">Sistema VPrime — tecnologia e gestão para o seu negócio 💼</p>
+  </div>
+
+  <script>
+    // Captura o código do vendedor da URL
+    const urlParams = new URLSearchParams(window.location.search);
+    const ref = urlParams.get("ref");
+
+    // Exibe nome do vendedor e equipe via Apps Script
+    google.script.run.withSuccessHandler(dados => {
+      if (!dados) {
+        document.getElementById("vendedorNome").textContent = "Vendedor não encontrado";
+        return;
+      }
+      document.getElementById("vendedorNome").textContent = dados.nome;
+      document.getElementById("equipeNome").textContent = "Equipe: " + (dados.chefe || "Independente");
+    }).getVendedorPorCodigo(ref);
+
+    // Função de compra
+    function comprar(plano) {
+      // Registra a venda na planilha antes de abrir o checkout
+      google.script.run.registrarVenda(ref, plano);
+
+      // Links reais do Mercado Pago
+      let linkPagamento = plano === 'basico' 
+        ? 'https://www.mercadopago.com.br/subscriptions/checkout?preapproval_plan_id=fe42e680f003451595fa0031ce283abc' 
+        : 'https://www.mercadopago.com.br/subscriptions/checkout?preapproval_plan_id=c6c298ddcc8943fba70d26d3a8aa3e7b';
+
+      // Abre checkout em nova aba
+      window.open(linkPagamento, '_blank');
+      alert('Venda registrada! Obrigado por adquirir o sistema.');
+    }
+  </script>
 </body>
 </html>
