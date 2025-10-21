@@ -3,93 +3,335 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
- <title>Afiliados NutriPrime Software | Programa de Parceria para Nutricionistas</title>
+  <title>Afiliados NutriPrime Software | Programa de Parceria para Nutricionistas</title>
   <meta name="description" content="Ganhe 30% de comissão recorrente indicando o software de gestão NutriPrime para nutricionistas. O parceiro ideal para sua renda extra.">
-  <link rel="icon" href="https://i.imgur.com/7WDbZz0.png" type="image/png" alt="Logo NutriPrime - Programa de Afiliados">
+  <link rel="icon" href="https://i.imgur.com/7WDbZz0.png" type="image/png">
 
   <style>
-    /* ====== RESET E TIPOGRAFIA ====== */
+    /* ====== RESET ====== */
     * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { font-family: Arial, sans-serif; background: #f9fafb; color: #333; }
 
-    /* ====== MENU ====== */
-    header { background: #000; color: #fff; display: flex; justify-content: space-between; align-items: center; padding: 15px 20px; position: fixed; top: 0; left: 0; width: 100%; z-index: 1000; height:50px; }
-    .logo-title { display: flex; align-items: center; gap: 12px; }
-    .logo-title h1 { font-size: 18px; color: #fff; margin: 0; }
-    nav ul { list-style: none; display: flex; gap: 20px; }
-    nav a { color: #fff; text-decoration: none; font-weight: bold; transition: color 0.3s; }
-    nav a:hover { color: #ffd700; }
-    .menu-toggle { font-size: 26px; cursor: pointer; display: none; background: none; border: none; color: #fff; }
-    .side-menu { position: fixed; top: 0; left: -250px; width: 250px; height: 100%; background: #000; z-index: 999; padding: 60px 20px; transition: left 0.3s ease; }
-    .side-menu.active { left: 0; }
-    .side-menu ul { list-style: none; display: flex; flex-direction: column; gap: 20px; }
-    .side-menu a { color: #fff; text-decoration: none; font-size: 18px; }
+    body {
+      font-family: Arial, sans-serif;
+      background: #f9fafb;
+      color: #333;
+      scroll-behavior: smooth;
+    }
+
+    /* ====== MENU SUPERIOR ====== */
+    header {
+      background: #000;
+      color: #fff;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 20px;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 1000;
+      height: 50px;
+    }
+
+    .logo-title {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .logo-title h1 {
+      font-size: 22px;
+      color: #fff;
+      margin: 0;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 20px;
+    }
+
+    nav a {
+      color: #fff;
+      text-decoration: none;
+      font-weight: bold;
+      transition: color 0.3s;
+    }
+
+    nav a:hover {
+      color: #ffd700;
+    }
+
+    .menu-toggle {
+      font-size: 26px;
+      cursor: pointer;
+      display: none;
+      background: none;
+      border: none;
+      color: #fff;
+    }
+
+    /* ====== MENU MOBILE ====== */
+    .side-menu {
+      position: fixed;
+      top: 0;
+      left: -250px;
+      width: 250px;
+      height: 100%;
+      background: #000;
+      z-index: 999;
+      padding: 60px 20px;
+      transition: left 0.3s ease;
+    }
+
+    .side-menu.active {
+      left: 0;
+    }
+
+    .side-menu ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .side-menu a {
+      color: #fff;
+      text-decoration: none;
+      font-size: 18px;
+    }
+
+    .mobile-title {
+      display: block;
+      font-size: 18px;
+      color: #fff;
+      margin-bottom: 20px;
+    }
+
+    @media (max-width: 768px) {
+      nav {
+        display: none;
+      }
+      .menu-toggle {
+        display: block;
+      }
+      .logo-title h1 {
+        display: none;
+      }
+    }
 
     /* ====== HERO ====== */
-    .hero { background: linear-gradient(135deg, #00a676, #008060); color: #fff; padding: 120px 20px 80px 20px; text-align: center; margin-top: 50px; }
-    .hero h1 { font-size: 2.4em; margin-bottom: 10px; }
-    .hero p { font-size: 1.2em; opacity: 0.9; }
+    .hero {
+      background: linear-gradient(135deg, #00a676, #008060);
+      color: #fff;
+      padding: 120px 20px 80px 20px;
+      text-align: center;
+      margin-top: 50px;
+    }
 
-    /* ====== SEÇÕES ====== */
-    section { max-width: 900px; margin: 60px auto; padding: 0 20px; }
+    .hero h1 {
+      font-size: 2.4em;
+      margin-bottom: 10px;
+    }
+
+    .hero p {
+      font-size: 1.2em;
+      opacity: 0.9;
+    }
+
+    /* ====== CONTEÚDO ====== */
+    section {
+      max-width: 900px;
+      margin: 60px auto;
+      padding: 0 20px;
+    }
 
     /* ====== BENEFÍCIOS ====== */
-    .beneficios { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 20px; }
-    .card { background: #fff; border-radius: 16px; padding: 25px; box-shadow: 0 4px 12px rgba(0,0,0,0.08); text-align: center; }
-    .card h3 { color: #00a676; margin-bottom: 10px; }
+    .beneficios {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 20px;
+    }
+
+    .card {
+      background: #fff;
+      border-radius: 16px;
+      padding: 25px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+      text-align: center;
+    }
+
+    .card h3 {
+      color: #00a676;
+      margin-bottom: 10px;
+    }
 
     /* ====== COMISSÃO ====== */
-    .comissao { background: #fff; border-radius: 16px; box-shadow: 0 4px 12px rgba(0,0,0,0.08); padding: 40px; text-align: center; }
-    .comissao h2 { color: #00a676; margin-bottom: 20px; }
-    .comissao p strong { font-size: 1.4em; color: #22c55e; }
+    .comissao {
+      background: #fff;
+      border-radius: 16px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+      padding: 40px;
+      text-align: center;
+    }
+
+    .comissao h2 {
+      color: #00a676;
+      margin-bottom: 20px;
+    }
+
+    .comissao p strong {
+      font-size: 1.4em;
+      color: #22c55e;
+    }
 
     /* ====== FORMULÁRIO ====== */
-    form { background: #fff; border-radius: 16px; box-shadow: 0 4px 12px rgba(0,0,0,0.08); padding: 40px; margin-top: 60px; }
-    form h2 { color: #00a676; margin-bottom: 25px; text-align: center; }
-    label { display: block; margin-bottom: 8px; font-weight: 500; }
-    input[type="text"], input[type="email"] { width: 100%; padding: 12px; margin-bottom: 20px; border: 1px solid #ccc; border-radius: 8px; font-size: 1em; }
-    button { background: linear-gradient(135deg, #00a676, #008060); color: #fff; font-size: 1.1em; font-weight: 600; border: none; border-radius: 8px; padding: 14px 24px; width: 100%; cursor: pointer; transition: 0.3s; }
-    button:hover { opacity: 0.9; transform: translateY(-2px); }
+    form {
+      background: #fff;
+      border-radius: 16px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+      padding: 40px;
+      margin-top: 60px;
+    }
 
-    /* ====== MENSAGEM DE STATUS ====== */
-    #mensagemStatus { text-align:center; color:#16a34a; font-weight:600; margin-top:10px; display:none; }
+    form h2 {
+      color: #00a676;
+      margin-bottom: 25px;
+      text-align: center;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 500;
+    }
+
+    input[type="text"], input[type="email"] {
+      width: 100%;
+      padding: 12px;
+      margin-bottom: 20px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 1em;
+    }
+
+    button {
+      background: linear-gradient(135deg, #00a676, #008060);
+      color: #fff;
+      font-size: 1.1em;
+      font-weight: 600;
+      border: none;
+      border-radius: 8px;
+      padding: 14px 24px;
+      width: 100%;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    button:hover {
+      opacity: 0.9;
+      transform: translateY(-2px);
+    }
+
+    #mensagemStatus {
+      text-align: center;
+      color: #16a34a;
+      font-weight: 600;
+      margin-top: 10px;
+      display: none;
+    }
 
     /* ====== MODAIS ====== */
-    .modal { display: none; position: fixed; z-index: 2000; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgba(0,0,0,0.6); justify-content: center; align-items: center; padding: 20px; }
-    .modal-content { background: #fff; border-radius: 16px; padding: 30px; max-width: 450px; width: 100%; text-align: center; box-shadow: 0 8px 20px rgba(0,0,0,0.3); animation: slideDown 0.3s ease-out; position: relative; }
-    .modal-content h2 { color: #00a676; margin-bottom: 15px; }
-    .modal-content p { margin-bottom: 20px; line-height: 1.4; }
-    .modal-content button { background: linear-gradient(135deg,#00a676,#008060); color:#fff; border:none; padding:12px 20px; border-radius:8px; cursor:pointer; font-weight:600; transition:0.3s; }
-    .modal-content button:hover { opacity:0.9; transform:translateY(-2px); }
-    .close { position:absolute; top:10px; right:15px; font-size:24px; cursor:pointer; color:#333; }
-    @keyframes slideDown { from { transform: translateY(-50px); opacity:0; } to { transform: translateY(0); opacity:1; } }
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 2000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      background-color: rgba(0,0,0,0.6);
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+
+    .modal-content {
+      background: #fff;
+      border-radius: 16px;
+      padding: 30px;
+      max-width: 450px;
+      width: 100%;
+      text-align: center;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+      animation: slideDown 0.3s ease-out;
+      position: relative;
+    }
+
+    .modal-content h2 {
+      color: #00a676;
+      margin-bottom: 15px;
+    }
+
+    .modal-content button {
+      background: linear-gradient(135deg,#00a676,#008060);
+      color:#fff;
+      border:none;
+      padding:12px 20px;
+      border-radius:8px;
+      cursor:pointer;
+      font-weight:600;
+      transition:0.3s;
+    }
+
+    .modal-content button:hover {
+      opacity:0.9;
+      transform:translateY(-2px);
+    }
+
+    .close {
+      position:absolute;
+      top:10px;
+      right:15px;
+      font-size:24px;
+      cursor:pointer;
+      color:#333;
+    }
+
+    @keyframes slideDown {
+      from { transform: translateY(-50px); opacity:0; }
+      to { transform: translateY(0); opacity:1; }
+    }
 
     /* ====== RODAPÉ ====== */
-    footer { text-align: center; padding: 40px 20px; color: #777; font-size: 0.9em; }
-
-    /* ====== RESPONSIVO ====== */
-    @media (max-width: 768px) { nav { display: none; } .menu-toggle { display: block; } }
+    footer {
+      text-align: center;
+      padding: 40px 20px;
+      color: #777;
+      font-size: 0.9em;
+    }
   </style>
 </head>
 <body>
 
-  <!-- HEADER / MENU -->
- <header>
+<header>
   <button class="menu-toggle" onclick="toggleMenu()">☰</button>
   <div class="logo-title">
-    <a href="#home" class="logo">
-      <img src="https://i.postimg.cc/mgmgc7Rd/logo50preto.png" alt="Software NutriPrime para Nutricionistas" style="height:50px;">
+    <a href="index.html" class="logo">
+      <img src="https://i.imgur.com/7WDbZz0.png" alt="Software NutriPrime para Nutricionistas" style="height:50px;">
     </a>
     <h1 class="header-title">NutriPrime – Sistema para Nutricionistas e Clínicas de Nutrição</h1>
   </div>
 
   <nav>
     <ul>
-      <li><a href="index.html" onclick="toggleMenu()">Página Inicial</a></li>
-      <li><a href="sobre.html" onclick="toggleMenu()">Sobre Nós</a></li>
-      <li><a href="planos.html" onclick="toggleMenu()" class="active">Planos</a></li>
-      <li><a href="afiliadosnutriprime.html" onclick="toggleMenu()">Afiliados</a></li>
-      <li><a href="faq.html" onclick="toggleMenu()">Perguntas Frequentes</a></li>
+      <li><a href="index.html">Página Inicial</a></li>
+      <li><a href="sobre.html">Sobre Nós</a></li>
+      <li><a href="planos.html">Planos</a></li>
+      <li><a href="afiliadosnutriprime.html" class="active">Afiliados</a></li>
+      <li><a href="faq.html">Perguntas Frequentes</a></li>
     </ul>
   </nav>
 </header>
@@ -105,113 +347,110 @@
   </ul>
 </div>
 
-  <!-- HERO -->
- <section class="hero">
+<section class="hero">
   <h1>Programa de Afiliados NutriPrime Software de Gestão</h1>
   <p>Ganhe 30% de comissão recorrente por cada nutricionista que assinar nosso sistema!</p>
 </section>
 
-  <!-- BENEFÍCIOS -->
-  <section>
-    <h2 style="text-align: center; margin-bottom: 30px;">Por que ser um afiliado NutriPrime?</h2>
-    <div class="beneficios">
-      <div class="card">
-        <h3>💰 Renda recorrente</h3>
-        <p>Receba 30% todos os meses, enquanto o cliente permanecer ativo e adimplente.</p>
-      </div>
-      <div class="card">
+<section>
+  <h2 style="text-align:center;margin-bottom:30px;">Por que ser um afiliado NutriPrime?</h2>
+  <div class="beneficios">
+    <div class="card">
+      <h3>💰 Renda recorrente</h3>
+      <p>Receba 30% todos os meses, enquanto o cliente permanecer ativo e adimplente.</p>
+    </div>
+    <div class="card">
       <h3>🚀 Venda um Produto de Alto Valor</h3>
       <p>O NutriPrime é essencial para o dia a dia do nutricionista. A alta satisfação gera baixa taxa de cancelamento.</p>
     </div>
-      <div class="card">
-        <h3>📈 Sistema automático</h3>
-        <p>Monitoramento transparente das indicações e comissões via relatório de afiliado.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- COMISSÃO -->
-  <section class="comissao">
-    <h2>Como funciona a comissão?</h2>
-    <p>Você recebe <strong>30%</strong> de todas as mensalidades pagas pelos clientes que indicar, de forma automática e contínua, enquanto as assinaturas estiverem ativas.</p><br>
-    <p>Pagamentos realizados <strong>todo dia 7</strong> do mês seguinte via PIX cadastrado após aprovação.</p>
-  </section>
-
-  <!-- FORMULÁRIO -->
-  <section>
-    <form id="formAfiliado">
-      <h2>Cadastre-se para ser um Afiliado</h2>
-      <label for="nome">Nome completo</label>
-      <input type="text" id="nome" name="nome" required />
-      <label for="email">E-mail</label>
-      <input type="email" id="email" name="email" required />
-      <button type="submit">Quero me Afiliar</button>
-      <div id="mensagemStatus"></div>
-    </form>
-  </section>
-
-  <!-- MODAIS -->
-  <div id="modalSucesso" class="modal">
-    <div class="modal-content">
-      <span class="close" onclick="closeModal('modalSucesso')">&times;</span>
-      <h2>✅ Sucesso!</h2>
-      <p>Sua solicitação de Afiliado foi recebida.<br>Em breve você receberá as informações no e-mail cadastrado.</p>
-      <button onclick="closeModal('modalSucesso')">Fechar</button>
+    <div class="card">
+      <h3>📈 Sistema automático</h3>
+      <p>Monitoramento transparente das indicações e comissões via relatório de afiliado.</p>
     </div>
   </div>
+</section>
 
-  <div id="modalErro" class="modal">
-    <div class="modal-content">
-      <span class="close" onclick="closeModal('modalErro')">&times;</span>
-      <h2>❌ Ocorreu um erro</h2>
-      <p>Não foi possível enviar sua solicitação. Por favor, tente novamente.</p>
-      <button onclick="closeModal('modalErro')">Fechar</button>
-    </div>
+<section class="comissao">
+  <h2>Como funciona a comissão?</h2>
+  <p>Você recebe <strong>30%</strong> de todas as mensalidades pagas pelos clientes que indicar, de forma automática e contínua, enquanto as assinaturas estiverem ativas.</p><br>
+  <p>Pagamentos realizados <strong>todo dia 7</strong> do mês seguinte via PIX cadastrado após aprovação.</p>
+</section>
+
+<section>
+  <form id="formAfiliado">
+    <h2>Cadastre-se para ser um Afiliado</h2>
+    <label for="nome">Nome completo</label>
+    <input type="text" id="nome" name="nome" required />
+    <label for="email">E-mail</label>
+    <input type="email" id="email" name="email" required />
+    <button type="submit">Quero me Afiliar</button>
+    <div id="mensagemStatus"></div>
+  </form>
+</section>
+
+<!-- MODAIS -->
+<div id="modalSucesso" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeModal('modalSucesso')">&times;</span>
+    <h2>✅ Sucesso!</h2>
+    <p>Sua solicitação de Afiliado foi recebida.<br>Em breve você receberá as informações no e-mail cadastrado.</p>
+    <button onclick="closeModal('modalSucesso')">Fechar</button>
   </div>
+</div>
 
-  <footer>
-    © 2025 NutriPrime | Todos os direitos reservados
-  </footer>
+<div id="modalErro" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeModal('modalErro')">&times;</span>
+    <h2>❌ Ocorreu um erro</h2>
+    <p>Não foi possível enviar sua solicitação. Por favor, tente novamente.</p>
+    <button onclick="closeModal('modalErro')">Fechar</button>
+  </div>
+</div>
 
-  <script>
-    function toggleMenu() { document.getElementById("sideMenu").classList.toggle("active"); }
-    function openModal(id) { document.getElementById(id).style.display = 'flex'; }
-    function closeModal(id) { document.getElementById(id).style.display = 'none'; }
-    window.onclick = e => { if(e.target.classList.contains('modal')) closeModal(e.target.id); }
+<footer>
+  © 2025 NutriPrime | Todos os direitos reservados
+</footer>
 
-    const form = document.getElementById('formAfiliado');
-    const status = document.getElementById('mensagemStatus');
+<script>
+function toggleMenu() {
+  document.getElementById("sideMenu").classList.toggle("active");
+}
+function openModal(id) { document.getElementById(id).style.display = 'flex'; }
+function closeModal(id) { document.getElementById(id).style.display = 'none'; }
+window.onclick = e => { if(e.target.classList.contains('modal')) closeModal(e.target.id); }
 
-    form.addEventListener('submit', async e => {
-      e.preventDefault();
-      const dados = { nome: form.nome.value.trim(), email: form.email.value.trim() };
-      if(!dados.nome || !dados.email) { openModal('modalErro'); return; }
+const form = document.getElementById('formAfiliado');
+const status = document.getElementById('mensagemStatus');
 
-      // Exibir mensagem "Enviando solicitação..."
-      status.style.display = 'block';
-      status.textContent = 'Enviando solicitação...';
+form.addEventListener('submit', async e => {
+  e.preventDefault();
+  const dados = { nome: form.nome.value.trim(), email: form.email.value.trim() };
+  if(!dados.nome || !dados.email) { openModal('modalErro'); return; }
 
-      try {
-        const response = await fetch('https://script.google.com/macros/s/AKfycbwTIioWTeoK6TXl3ykkjgfqFDOy9QStxhsCET-jsn2ugewXmpUHXB1IsK1AFD9Jb5MjcQ/exec', {
-          method: 'POST',
-          body: JSON.stringify(dados)
-        });
-        const result = await response.json();
+  status.style.display = 'block';
+  status.textContent = 'Enviando solicitação...';
 
-        if(result.status === "success") {
-          form.reset();
-          status.style.display = 'none';
-          openModal('modalSucesso');
-        } else {
-          status.style.display = 'none';
-          openModal('modalErro');
-        }
-      } catch(err) {
-        console.error(err);
-        status.style.display = 'none';
-        openModal('modalErro');
-      }
+  try {
+    const response = await fetch('https://script.google.com/macros/s/AKfycbwTIioWTeoK6TXl3ykkjgfqFDOy9QStxhsCET-jsn2ugewXmpUHXB1IsK1AFD9Jb5MjcQ/exec', {
+      method: 'POST',
+      body: JSON.stringify(dados)
     });
-  </script>
+    const result = await response.json();
+
+    if(result.status === "success") {
+      form.reset();
+      status.style.display = 'none';
+      openModal('modalSucesso');
+    } else {
+      status.style.display = 'none';
+      openModal('modalErro');
+    }
+  } catch(err) {
+    status.style.display = 'none';
+    openModal('modalErro');
+  }
+});
+</script>
+
 </body>
 </html>
