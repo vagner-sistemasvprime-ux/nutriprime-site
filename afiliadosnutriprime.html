@@ -11,93 +11,18 @@
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body { font-family: Arial, sans-serif; background: #f9fafb; color: #333; }
 
- /* ====== MENU SUPERIOR ====== */
-  header {
-    background: #000;
-    color: #fff;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 15px 20px;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    z-index: 1000;
-    height:50px;
-  }
-
-  /* Logo + Título */
-  .logo-title {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-  }
-
-  .logo-title h1 {
-    font-size: 22px;
-    color: #fff;
-    margin: 0;
-  }
-
-  /* Menu desktop */
-  nav ul {
-    list-style: none;
-    display: flex;
-    gap: 20px;
-  }
-
-  nav a {
-    color: #fff;
-    text-decoration: none;
-    font-weight: bold;
-    transition: color 0.3s;
-  }
-
-  nav a:hover {
-    color: #ffd700;
-  }
-
-  /* Botão mobile */
-  .menu-toggle {
-    font-size: 26px;
-    cursor: pointer;
-    display: none;
-    background: none;
-    border: none;
-    color: #fff;
-  }
-
-  /* Menu lateral mobile */
-  .side-menu {
-    position: fixed;
-    top: 0;
-    left: -250px;
-    width: 250px;
-    height: 100%;
-    background: #000;
-    z-index: 999;
-    padding: 60px 20px;
-    transition: left 0.3s ease;
-  }
-
-  .side-menu.active {
-    left: 0;
-  }
-
-  .side-menu ul {
-    list-style: none;
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-  }
-
-  .side-menu a {
-    color: #fff;
-    text-decoration: none;
-    font-size: 18px;
-  }
-
+    /* ====== MENU ====== */
+    header { background: #000; color: #fff; display: flex; justify-content: space-between; align-items: center; padding: 15px 20px; position: fixed; top: 0; left: 0; width: 100%; z-index: 1000; height:50px; }
+    .logo-title { display: flex; align-items: center; gap: 12px; }
+    .logo-title h1 { font-size: 18px; color: #fff; margin: 0; }
+    nav ul { list-style: none; display: flex; gap: 20px; }
+    nav a { color: #fff; text-decoration: none; font-weight: bold; transition: color 0.3s; }
+    nav a:hover { color: #ffd700; }
+    .menu-toggle { font-size: 26px; cursor: pointer; display: none; background: none; border: none; color: #fff; }
+    .side-menu { position: fixed; top: 0; left: -250px; width: 250px; height: 100%; background: #000; z-index: 999; padding: 60px 20px; transition: left 0.3s ease; }
+    .side-menu.active { left: 0; }
+    .side-menu ul { list-style: none; display: flex; flex-direction: column; gap: 20px; }
+    .side-menu a { color: #fff; text-decoration: none; font-size: 18px; }
 
     /* ====== HERO ====== */
     .hero { background: linear-gradient(135deg, #00a676, #008060); color: #fff; padding: 120px 20px 80px 20px; text-align: center; margin-top: 50px; }
@@ -146,36 +71,32 @@
 
   <!-- HEADER / MENU -->
   <header>
- <button class="menu-toggle" onclick="toggleMenu()">☰</button>
-  <div class="logo-title">
-    <a href="#home" class="logo">
-      <img src="https://i.postimg.cc/mgmgc7Rd/logo50preto.png" alt="Software NutriPrime para Nutricionistas" style="height:50px;">
-    </a>
-    <h1 class="header-title">NutriPrime – Sistema para Nutricionistas e Clínicas de Nutrição</h1>
-  </div>
+    <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+    <div class="logo-title">
+      <a href="index.html" class="logo"><img src="https://i.imgur.com/7WDbZz0.png" alt="Logo Nutriprime" style="height:40px;"></a>
+      <h1>NutriPrime</h1>
+    </div>
+    <nav>
+      <ul>
+        <li><a href="index.html">Página Inicial</a></li>
+        <li><a href="sobre.html">Sobre Nós</a></li>
+        <li><a href="planos.html">Planos</a></li>
+        <li><a href="afiliados.html" class="active">Afiliados</a></li>
+        <li><a href="faq.html">Perguntas Frequentes</a></li>
+      </ul>
+    </nav>
+  </header>
 
-  <nav>
+  <div class="side-menu" id="sideMenu">
+    <h1 class="mobile-title">NutriPrime</h1>
     <ul>
       <li><a href="index.html" onclick="toggleMenu()">Página Inicial</a></li>
       <li><a href="sobre.html" onclick="toggleMenu()">Sobre Nós</a></li>
-      <li><a href="planos.html" onclick="toggleMenu()" class="active">Planos</a></li>
-      <li><a href="afiliadosnutriprime.html" onclick="toggleMenu()">Afiliados</a></li>
+      <li><a href="planos.html" onclick="toggleMenu()">Planos</a></li>
+      <li><a href="afiliados.html" onclick="toggleMenu()">Afiliados</a></li>
       <li><a href="faq.html" onclick="toggleMenu()">Perguntas Frequentes</a></li>
     </ul>
-  </nav>
-</header>
-
-<div class="side-menu" id="sideMenu">
-  <h1 class="mobile-title">NutriPrime – Sistema para Nutricionistas e Clínicas de Nutrição</h1>
-  <ul>
-    <li><a href="index.html" onclick="toggleMenu()">Página Inicial</a></li>
-    <li><a href="sobre.html" onclick="toggleMenu()">Sobre Nós</a></li>
-    <li><a href="planos.html" onclick="toggleMenu()">Planos</a></li>
-    <li><a href="afiliadosnutriprime.html" onclick="toggleMenu()">Afiliados</a></li>
-    <li><a href="faq.html" onclick="toggleMenu()">Perguntas Frequentes</a></li>
-  </ul>
-</div>
-
+  </div>
 
   <!-- HERO -->
   <section class="hero">
