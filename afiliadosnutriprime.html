@@ -63,14 +63,18 @@
       color: #ffd700;
     }
 
-    .menu-toggle {
-      font-size: 26px;
-      cursor: pointer;
-      display: none;
-      background: none;
-      border: none;
-      color: #fff;
-    }
+.menu-toggle { 
+  font-size: 26px; 
+  cursor: pointer; 
+  display: none; 
+  background: none; 
+  border: none; 
+  color: #fff; 
+  position: absolute; 
+  left: 15px;     /* força alinhamento à esquerda */
+  top: 12px;      /* centraliza verticalmente dentro do header */
+  z-index: 1100;  /* garante que fique acima da logo */
+}
 
     /* ====== MENU MOBILE ====== */
     .side-menu {
@@ -337,7 +341,7 @@
 </header>
 
 <div class="side-menu" id="sideMenu">
-  <h1 class="mobile-title">NutriPrime</h1>
+  <h1 class="mobile-title">NutriPrime – Sistema para Nutricionistas e Clínicas de Nutrição</h1>
   <ul>
     <li><a href="index.html" onclick="toggleMenu()">Página Inicial</a></li>
     <li><a href="sobre.html" onclick="toggleMenu()">Sobre Nós</a></li>
