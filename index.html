@@ -6,9 +6,411 @@
   <title>Sistema para Nutricionista | NutriPrime: Software para Clínicas de Nutrição</title>
   <meta name="description" content="NutriPrime é o sistema online completo e intuitivo para nutricionistas e clínicas de nutrição. Organize consultas, planos alimentares e acompanhamento de pacientes. Experimente grátis!" />
   <link rel="icon" type="image/png" href="https://i.imgur.com/7WDbZz0.png">
-  <link rel="stylesheet" href="style.css">
 
-  <!-- Google tag (gtag.js) -->
+  <!-- === CSS EMBUTIDO === -->
+  <style>
+  /* Reset básico */
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  body {
+    font-family: Arial, sans-serif;
+  }
+
+  /* ====== MENU SUPERIOR ====== */
+  header {
+    background: #000;
+    color: #fff;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 20px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    height:50px;
+  }
+
+  /* Logo + Título */
+  .logo-title {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .logo-title h1 {
+    font-size: 22px;
+    color: #fff;
+    margin: 0;
+  }
+
+  /* Menu desktop */
+  nav ul {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+  }
+
+  nav a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s;
+  }
+
+  nav a:hover {
+    color: #ffd700;
+  }
+
+  /* Botão mobile */
+  .menu-toggle {
+    font-size: 26px;
+    cursor: pointer;
+    display: none;
+    background: none;
+    border: none;
+    color: #fff;
+  }
+
+  /* Menu lateral mobile */
+  .side-menu {
+    position: fixed;
+    top: 0;
+    left: -250px;
+    width: 250px;
+    height: 100%;
+    background: #000;
+    z-index: 999;
+    padding: 60px 20px;
+    transition: left 0.3s ease;
+  }
+
+  .side-menu.active {
+    left: 0;
+  }
+
+  .side-menu ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .side-menu a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 18px;
+  }
+
+  /* Hero Section */
+  .hero {
+    width: 100%;
+    height: 500px;
+    background: url('https://i.imgur.com/MFkEFVB.png') no-repeat center center/cover;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: #fff;
+  }
+
+  .hero-overlay {
+    background: rgba(0, 0, 0, 0.5);
+    padding: 20px;
+    border-radius: 12px;
+    max-width: 90%;
+  }
+
+  .hero h1 {
+    font-size: 2rem;
+    margin-bottom: 15px;
+  }
+
+  .hero p {
+    font-size: 1.2rem;
+  }
+
+  /* Responsivo */
+  @media (max-width: 768px) {
+    nav {
+      display: none;
+    }
+
+    .menu-toggle {
+      display: block;
+    }
+
+    .logo-title {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .logo-title h1 {
+      display: none;
+    }
+
+    .mobile-title {
+      display: block;
+      font-size: 18px;
+      color: #fff;
+      margin-bottom: 20px;
+    }
+
+    .hero h1 {
+      font-size: 1.5rem;
+    }
+
+    .hero p {
+      font-size: 1rem;
+    }
+  }
+
+  /* missão */
+  .mission {
+    padding: 60px 20px;
+    background: #fff;
+    text-align: center;
+  }
+
+  .mission h2 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+    color: #ff9900;
+  }
+
+  .mission p {
+    font-size: 1.2rem;
+    max-width: 800px;
+    margin: 0 auto;
+    color: #333;
+    line-height: 1.6;
+    font-style: italic;
+  }
+
+  @media (max-width: 768px) {
+    .mission h2 {
+      font-size: 1.5rem;
+    }
+
+    .mission p {
+      font-size: 1rem;
+    }
+  }
+
+  /* recursos e benefícios */
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+
+  .features {
+    padding: 60px 20px;
+    background: #f5f5f5;
+    text-align: left;
+  }
+
+  .features h2 {
+    font-size: 2rem;
+    margin-bottom: 40px;
+    color: #004aad;
+    text-align: center;
+  }
+
+  .features-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 40px;
+    align-items: start;
+    justify-items: center;
+  }
+
+  .feature {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    background: #fff;
+    padding: 20px;
+    border-radius: 12px;
+    width: 100%;
+    max-width: 500px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  }
+
+  .feature img {
+    width: 120px;
+    height: 120px;
+    object-fit: cover;
+    border-radius: 12px;
+  }
+
+  .feature-text h3 {
+    margin-bottom: 10px;
+    font-size: 1.2rem;
+    color: #004aad;
+  }
+
+  .feature-text p {
+    font-size: 1rem;
+    color: #333;
+    line-height: 1.5;
+  }
+
+  @media (max-width: 768px) {
+    .features-grid {
+      grid-template-columns: 1fr;
+      gap: 30px;
+    }
+
+    .feature {
+      flex-direction: column;
+      text-align: center;
+    }
+
+    .feature img {
+      width: 100px;
+      height: 100px;
+    }
+  }
+
+  /* carrossel */
+  .carousel-section {
+    padding: 60px 20px;
+    background: #fff;
+  }
+
+  .carousel-container {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+    max-width: 1200px;
+    margin: 0 auto;
+    flex-wrap: nowrap;
+  }
+
+  .carousel-text {
+    flex: 1;
+    min-width: 300px;
+  }
+
+  .carousel-text h2 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+    color: #004aad;
+  }
+
+  .carousel-text p {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: #333;
+  }
+
+  .carousel {
+    flex: 1;
+    min-width: 300px;
+    max-width: 500px;
+    overflow: hidden;
+    border-radius: 12px;
+  }
+
+  .carousel-images {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+  }
+
+  .carousel-images img {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+    border-radius: 12px;
+    flex-shrink: 0;
+  }
+
+  @media (max-width: 768px) {
+    .carousel-container {
+      flex-direction: column;
+      align-items: center;
+      gap: 30px;
+    }
+
+    .carousel-text {
+      text-align: center;
+    }
+
+    .carousel-images img {
+      height: 200px;
+    }
+  }
+
+  /* vídeo */
+  .video-apresentacao {
+    text-align: center;
+    padding: 40px 20px;
+    background: #f9f9f9;
+  }
+
+  .video-apresentacao h2 {
+    margin-bottom: 20px;
+    font-size: 28px;
+    color: #333;
+  }
+
+  .video-apresentacao iframe {
+    border: none;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    max-width: 900px;
+    width: 100%;
+  }
+
+  /* CTA teste */
+  .cta-teste {
+    background: linear-gradient(135deg, #004aad, #007bff);
+    color: #fff;
+    text-align: center;
+    padding: 60px 20px;
+    border-radius: 12px;
+    margin: 60px auto;
+    max-width: 900px;
+  }
+
+  .cta-teste h2 {
+    font-size: 2rem;
+    margin-bottom: 15px;
+  }
+
+  .cta-teste p {
+    font-size: 1.1rem;
+    margin-bottom: 25px;
+  }
+
+  .cta-teste .btn-teste {
+    display: inline-block;
+    background: #ffd700;
+    color: #000;
+    font-size: 1.1rem;
+    padding: 12px 25px;
+    border-radius: 8px;
+    text-decoration: none;
+    transition: background 0.3s;
+  }
+
+  .cta-teste .btn-teste:hover {
+    background: #ffcc00;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+  </style>
+
+  <!-- Google Tag -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=AW-17287488341"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
@@ -51,7 +453,6 @@
 </div>
 
 <main>
-  <!-- Hero -->
   <section class="hero">
     <div class="hero-overlay">
       <h1>NutriPrime: O Sistema para Nutricionista que Transforma seu Atendimento</h1>
@@ -59,7 +460,6 @@
     </div>
   </section>
 
-  <!-- Missão -->
   <section class="mission" id="missao">
     <div class="container">
       <h2>Por que o NutriPrime é a Solução Certa?</h2>
@@ -67,7 +467,6 @@
     </div>
   </section>
 
-  <!-- Benefícios -->
   <section class="features" id="beneficios">
     <div class="container">
       <h2>Benefícios do NutriPrime</h2>
@@ -104,7 +503,6 @@
     </div>
   </section>
 
-  <!-- Carrossel -->
   <section class="carousel-section" id="carrossel">
     <div class="container carousel-container">
       <div class="carousel-text">
@@ -122,7 +520,6 @@
     </div>
   </section>
 
-  <!-- Vídeo -->
   <section class="video-apresentacao">
     <div class="container">
       <h2>Assista e veja como nosso Software para Nutricionista funciona</h2>
@@ -134,7 +531,6 @@
     </div>
   </section>
 
-  <!-- CTA Teste Grátis -->
   <section class="cta-teste">
     <div class="container">
       <h2>Experimente grátis por 7 dias</h2>
@@ -142,7 +538,6 @@
       <a href="planos.html#teste-gratis" class="btn-teste">Quero meu teste grátis</a>
     </div>
   </section>
-
 </main>
 
 <script>
