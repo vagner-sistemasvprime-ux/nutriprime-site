@@ -256,19 +256,27 @@ function validarCupom() {
     return;
   }
 
-  if (valor === CUPOM_VALIDO) {
-    mensagemCupom.textContent = "✅ Cupom válido! Acesso gratuito até 31/12/2025.";
-    mensagemCupom.style.color = "green";
-    campoCupom.style.borderColor = "green";
-    campoCupom.style.backgroundColor = "white";
+ if (valor === CUPOM_VALIDO) {
+  mensagemCupom.textContent = "✅ Cupom válido! Acesso gratuito até 31/12/2025.";
+  mensagemCupom.style.color = "green";
+  mensagemCupom.style.border = "1px solid green";
+  mensagemCupom.style.borderRadius = "6px";
+  mensagemCupom.style.padding = "6px 10px";
+  mensagemCupom.style.backgroundColor = "white"; // <- fundo branco
+  campoCupom.style.borderColor = "green";
+  campoCupom.style.backgroundColor = "white";
 
-  } else {
-    mensagemCupom.textContent = "⚠️ Cupom inválido. O teste será de 7 dias.";
-    mensagemCupom.style.color = "red";
-    campoCupom.style.borderColor = "red";
-    campoCupom.style.backgroundColor = "white";
+} else {
+  mensagemCupom.textContent = "⚠️ Cupom inválido. O teste será de 7 dias.";
+  mensagemCupom.style.color = "red";
+  mensagemCupom.style.border = "1px solid red";
+  mensagemCupom.style.borderRadius = "6px";
+  mensagemCupom.style.padding = "6px 10px";
+  mensagemCupom.style.backgroundColor = "white"; // <- fundo branco
+  campoCupom.style.borderColor = "red";
+  campoCupom.style.backgroundColor = "white";
+}
 
-  }
 }
 
 // Envio do formulário (único e completo)
@@ -311,6 +319,7 @@ form.addEventListener("submit", async function(e) {
 
 </body>
 </html>
+
 
 
 
