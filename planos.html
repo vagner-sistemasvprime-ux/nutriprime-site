@@ -133,14 +133,19 @@
     <h2>Experimente Gratuitamente por 7 Dias</h2>
     <p>Descubra como o Nutriprime pode transformar sua rotina de atendimentos nutricionais. Sem compromisso, teste todas as funcionalidades e veja os resultados!</p>
 
-    <form id="formTesteGratis" class="form-teste-gratis">
-      <input type="text" name="nome" placeholder="Seu nome" required>
-      <input type="email" name="email" placeholder="Seu e-mail" required>
-      <input type="tel" name="telefone" placeholder="Telefone" required>
-      <button type="submit">Solicitar Teste Grátis</button>
-    </form>
-    
-    <div id="mensagem-sucesso" class="mensagem-sucesso"></div>
+   <form id="formTesteGratis" class="form-teste-gratis">
+  <input type="text" name="nome" placeholder="Seu nome" required>
+  <input type="email" name="email" placeholder="Seu e-mail" required>
+  <input type="tel" name="telefone" placeholder="Telefone" required>
+
+  <input type="text" name="cupom" id="cupom" placeholder="Cupom de desconto (opcional)">
+  <div id="mensagem-cupom" class="mensagem-cupom"></div>
+
+  <button type="submit">Solicitar Teste Grátis</button>
+</form>
+
+<div id="mensagem-sucesso" class="mensagem-sucesso"></div>
+
   </div>
 </section>
 
@@ -225,29 +230,56 @@
 
   </main>
 
-  <!-- SCRIPTS -->
-  <script>
-    function toggleMenu() {
-      document.getElementById("sideMenu").classList.toggle("active");
-    }
-
-
-
-
+ <!-- SCRIPTS -->
+<script>
+function toggleMenu() {
+  document.getElementById("sideMenu").classList.toggle("active");
+}
 
 const form = document.getElementById("formTesteGratis");
 const mensagem = document.getElementById("mensagem-sucesso");
+const campoCupom = document.getElementById("cupom");
+const mensagemCupom = document.getElementById("mensagem-cupom");
 
+const CUPOM_VALIDO = "PROMO3112";
+
+// Validação automática ao digitar ou sair do campo
+campoCupom.addEventListener("input", validarCupom);
+campoCupom.addEventListener("blur", validarCupom);
+
+function validarCupom() {
+  const valor = campoCupom.value.trim().toUpperCase();
+
+  if (valor === "") {
+    mensagemCupom.textContent = "";
+    campoCupom.style.borderColor = "";
+    return;
+  }
+
+  if (valor === CUPOM_VALIDO) {
+    mensagemCupom.textContent = "✅ Cupom válido! Acesso gratuito até 31/12/2025.";
+    mensagemCupom.style.color = "green";
+    campoCupom.style.borderColor = "green";
+  } else {
+    mensagemCupom.textContent = "⚠️ Cupom inválido. O teste será de 7 dias.";
+    mensagemCupom.style.color = "red";
+    campoCupom.style.borderColor = "red";
+  }
+}
+
+// Envio do formulário (único e completo)
 form.addEventListener("submit", async function(e) {
   e.preventDefault();
 
+  const cupomDigitado = form.cupom.value.trim().toUpperCase();
   const dados = {
     nome: form.nome.value,
     email: form.email.value,
-    telefone: form.telefone.value
+    telefone: form.telefone.value,
+    cupom: cupomDigitado,
+    validade: cupomDigitado === CUPOM_VALIDO ? "31/12/2025" : "7 dias"
   };
 
-  // Mensagem de aguarde
   mensagem.textContent = "Aguarde, enviando solicitação...";
 
   try {
@@ -258,9 +290,11 @@ form.addEventListener("submit", async function(e) {
 
     const result = await response.json();
 
-    if(result.status === "success") {
+    if (result.status === "success") {
       mensagem.textContent = "Solicitação realizada com sucesso! Em breve entraremos em contato.";
       form.reset();
+      mensagemCupom.textContent = "";
+      campoCupom.style.borderColor = "";
     } else {
       mensagem.textContent = "Ocorreu um erro, tente novamente.";
     }
@@ -269,20 +303,11 @@ form.addEventListener("submit", async function(e) {
     console.error(error);
   }
 });
-
-  </script>
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=AW-17287488341">
 </script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
 
-  gtag('config', 'AW-17287488341');
-</script>
 </body>
 </html>
+
 
 
 
